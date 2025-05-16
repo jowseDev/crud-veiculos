@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Adicionar Novo veiculo</title>
+</head>
+<body>
+    <form th:action="@{/veiculo/salvar}" method="post">
+        <input type="text" name="placa" placeholder="Placa" required />    
+        <input type="number" name="anofabricacao" placeholder="fabricacao" required />      
+        <button type="submit">Adicionar</button>
+    </form>
+</body>
+</html>

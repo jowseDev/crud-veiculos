@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Alterar caminhao</title>
+</head>
+<body>
+    <form th:action="@{/caminhao/salvar}" method="post">
+        <input type="hidden" name="id" th:value="${caminhao.id}" required />
+        <input type="text" name="placa" placeholder="Placa" th:value="${caminhao.placa}" required />    
+        <input type="number" name="anofabricacao" placeholder="Fabricacao" th:value="${caminhao.anofabricacao}" required /> 
+        <input type="number" name="eixos" placeholder="Eixos" th:value="${caminhao.eixos}" required />     
+        <input type="number" name="carga" placeholder="Carga" th:value="${caminhao.carga}" required />  
+        <button type="submit">Alterar</button>
+    </form>
+</body>
+</html>

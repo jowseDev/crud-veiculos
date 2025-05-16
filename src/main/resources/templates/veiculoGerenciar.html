@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CRUD SPA - Veículo</title>
+    <style>
+      :root {
+        --bg: #f5f7fa;
+        --card-bg: #ffffff;
+        --text: #2d3436;
+        --primary: #0984e3;
+        --danger: #d63031;
+        --gray: #b2bec3;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        padding: 2rem;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      form {
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border: 1px solid var(--gray);
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border 0.2s;
+      }
+      input:focus,
+      textarea:focus {
+        border-color: var(--primary);
+        outline: none;
+      }
+      button {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      .btn-primary {
+        background-color: var(--primary);
+        color: white;
+      }
+      .btn-primary:hover {
+        background-color: #0652dd;
+      }
+      .btn-secondary {
+        background-color: var(--gray);
+        color: white;
+      }
+      .btn-secondary:hover {
+        background-color: #636e72;
+      }
+      .btn-danger {
+        background-color: var(--danger);
+        color: white;
+      }
+      .btn-danger:hover {
+        background-color: #c0392b;
+      }
+      .veiculo {
+        background: var(--card-bg);
+        padding: 1.2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+        margin-bottom: 1.5rem;
+        transition: transform 0.2s;
+      }
+      .veiculo:hover {
+        transform: scale(1.01);
+      }
+      .veiculo h3 {
+        margin-bottom: 0.5rem;
+        color: var(--primary);
+      }
+      .veiculo-buttons {
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.5rem;
+      }
+      @media (max-width: 600px) {
+        button {
+          width: 100%;
+        }
+        .veiculo-buttons {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>CRUD SPA - Veículo</h1>
+      <form id="formulario">
+        <input type="hidden" id="veiculoId" />
+        <input type="text" id="placa" placeholder="Placa" required />
+        <input
+          type="number"
+          id="fabricacao"
+          placeholder="Ano de fabricacao"
+          required
+        />
+        <button class="btn-primary" type="submit">Salvar</button>
+      </form>
+      <div id="veiculos"></div>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+      <script>
+        const API_URL = "https://localhost:8080/veiculoREST";
+        const form = document.getElementById("formulario");
+        const veiculosDiv = document.getElementById("veiculo");
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const id = document.getElementById("id_veiculo").value;
+          const placa = document.getElementById("placa").value;
+          const fabricacao = document.getElementById("fabricacao").value;
+          const veiculo = { placa, fabricacao };
+          try {
+            if (id) {
+              await axios.put(API_URL + "/" + id, veiculo);
+            } else {
+              await axios.put(API_URL, veiculo);
+            }
+            form.reset();
+            document.getElementById("veiculoId").value = "";
+          } catch (error) {
+            alert("Erro ao salvar veiculo!");
+          }
+        });
+      </script>
+    </div>
+  </body>
+</html>

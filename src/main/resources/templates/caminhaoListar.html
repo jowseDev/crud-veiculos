@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar veículos</title>
+</head>
+<body>
+    
+    <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Placa</th>
+            <th>Ano</th>
+            <th>Carga</th>
+            <th>Eixos</th>
+            <th>Alterar</th>
+            <th>Excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="caminhao : ${caminhoes}">
+            <td th:text="${caminhao.id}"></td>
+            <td th:text="${caminhao.placa}"></td>
+            <td th:text="${caminhao.anofabricacao}"></td>
+            <td th:text="${caminhao.carga}"></td>
+            <td th:text="${caminhao.eixos}"></td>
+            <td><a th:href="@{/caminhao/alterar/{id}(id=${caminhao.id})}">Alterar</a></td>
+            <td><a th:href="@{/caminhao/excluir/{id}(id=${caminhao.id})}">Excluir</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+</body>
+</html>
