@@ -15,9 +15,9 @@ private VeiculoRepository veiculoRepository;
 
 
     //CARROS PROIBIDOS DE RODAR
-    public List<Veiculo> ListaCarrosProibidosRodizio(String numerofinal){
+    public List<Veiculo> ListaCarrosProibidosRodizio(String numeroFinal){
         //CONSULTA A WEBSEREVICE PARA PROCURAR NO BANDO DE DADOS COM BASE NA STRING PASSADA NA FUNÇÃO    
-        return veiculoRepository.findByPlacaEndingWith(numerofinal);
+        return veiculoRepository.findByPlacaEndingWith(numeroFinal);
     }
     public List<Veiculo> ListaCarrosIsentos(int anoIsento){
         //CONSULTA A WEBSEREVICE PARA PROCURAR NO BANDO DE DADOS COM BASE NA STRING PASSADA NA FUNÇÃO    

@@ -21,21 +21,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/veiculoREST")
 public class VeiculoRest {
-
+    
     @Autowired
-    private VeiculoService veiculoService;
-
+    private VeiculoService servico;
 
     @GetMapping("/listar")
-    public List<Veiculo> ListarTodosVeiculos(){
-
-        List<Veiculo> veiculos = veiculoService.listar();
+    public List<Veiculo> listarTodosVeiculos(){
+        List<Veiculo> veiculos = servico.listar();
         return veiculos;
     }
 
-@PostMapping
-public ResponseEntity<Veiculo> createPost(@RequestBody Veiculo veiculo) {
-    Veiculo veiculoCadastro = veiculoService.salvar(veiculo);
-    return ResponseEntity.status(HttpStatus.CREATED).body(veiculoCadastro);
+    @PostMapping
+    public ResponseEntity<Veiculo> createPost(@RequestBody Veiculo veiculo){
+        Veiculo veiculoCadastrado = servico.salvar(veiculo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(veiculoCadastrado);
+
     }
+
 }

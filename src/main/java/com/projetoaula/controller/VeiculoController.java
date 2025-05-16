@@ -23,7 +23,7 @@ public class VeiculoController {
 
     //abrir paginas
 
-    @GetMapping("/proibidos")
+    @GetMapping("/proibidos")   
     public String gerenciar(Model model) {
         List<Veiculo> veiculos = veiculoService.ListaCarrosProibidosRodizio("9");
         model.addAttribute("veiculos", veiculos);
@@ -32,8 +32,8 @@ public class VeiculoController {
     
     @GetMapping("/isentos")
     public String isentos(Model model) {
-        List<Veiculo> veiculos = veiculoService.ListaCarrosIsentos(2005);
-        model.addAttribute("veiculos", veiculos);
+        List<Veiculo> isentos = veiculoService.ListaCarrosIsentos(2005);
+        model.addAttribute("veiculos", isentos);
         return "veiculoListar";
     }
 
@@ -43,12 +43,12 @@ public class VeiculoController {
 
     }
 
-    @PostMapping("/salvar")
-    public String addVeiculo(@ModelAttribute Veiculo veiculo){
-        veiculoService.salvar(veiculo);
-        return "redirect:/veiculo/isentos";
-        
-    }
+   // @PostMapping("/salvar")
+   // public String addVeiculo(@ModelAttribute Veiculo veiculo){
+   //     veiculoService.salvar(veiculo);
+   //     return "veiculoGerenciar";     
+   // }
+   
     @GetMapping("/gerenciar")
     public String gerenciarVeiculos(Model model){
         return "veiculoGerenciar";

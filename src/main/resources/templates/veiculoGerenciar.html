@@ -131,26 +131,29 @@
       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
       <script>
-        const API_URL = "https://localhost:8080/veiculoREST";
+        const API_URL = "http://localhost:8080/veiculoREST";
         const form = document.getElementById("formulario");
-        const veiculosDiv = document.getElementById("veiculo");
+        const veiculosDiv = document.getElementById("veiculos");
 
         form.addEventListener("submit", async (e) => {
           e.preventDefault();
-          const id = document.getElementById("id_veiculo").value;
+          const id = document.getElementById("veiculoId").value;
           const placa = document.getElementById("placa").value;
           const fabricacao = document.getElementById("fabricacao").value;
           const veiculo = { placa, fabricacao };
+
           try {
             if (id) {
               await axios.put(API_URL + "/" + id, veiculo);
+              alert("Veículo alterado com sucesso");
             } else {
-              await axios.put(API_URL, veiculo);
+              await axios.post(API_URL, veiculo);
+              alert("Veículo salvo com sucesso");
             }
             form.reset();
             document.getElementById("veiculoId").value = "";
           } catch (error) {
-            alert("Erro ao salvar veiculo!");
+            alert("Erro ao salvar o veículo");
           }
         });
       </script>

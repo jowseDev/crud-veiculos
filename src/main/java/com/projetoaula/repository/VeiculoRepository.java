@@ -8,6 +8,6 @@ import com.projetoaula.model.Veiculo;
 public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
 
     List<Veiculo> findByPlacaEndingWith(String numero);
-    List<Veiculo> findByAnofabricacaoLessThanEqual(int numero);
+    List<Veiculo> findByAnofabricacaoLessThanEqual(int anoFabricacao);
     
 }
