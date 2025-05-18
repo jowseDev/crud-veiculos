@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Lista de veiculos</title>
-</head>
-<body>
+  </head>
+  <body>
     <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Placa</th>
-            <th>Ano<th>
-            <th>Alterar</th>
-            <th>Excluir</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="veiculo : ${veiculos/listar}">
-            <td th:text="${veiculo.id}"></td>
-            <td th:text="${veiculo.placa}"></td>
-            <td th:text="${veiculo.anofabricacao}"></td>
-            <td><a th:href="@{/veiculo/alterar/{id}(id=${veiculo.id})}">Alterar</a></td>
-            <td><a th:href="@{/veiculo/excluir/{id}(id=${veiculo.id})}">Excluir</a></td>
-          </tr>
-        </tbody>
-      </table>
-
-</body>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Placa</th>
+          <th>Ano</th>
+          <th></th>
+          <th>Alterar</th>
+          <th>Excluir</th>
+        </tr>
+      </thead>
+      <tbody>
+        <br />
+        <tr th:each="veiculo : ${veiculos/listar}">
+          <td th:text="${veiculo.id}"></td>
+          <td th:text="${veiculo.placa}"></td>
+          <td th:text="${veiculo.anofabricacao}"></td>
+          <td>
+            <a th:href="@{/veiculo/alterar/{id}(id=${veiculo.id})}">Alterar</a>
+          </td>
+          <td>
+            <a th:href="@{/veiculo/excluir/{id}(id=${veiculo.id})}">Excluir</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
 </html>
