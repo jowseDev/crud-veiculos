@@ -155,7 +155,43 @@
           } catch (error) {
             alert("Erro ao salvar o veículo");
           }
+          listarVeiculos();
         });
+
+        async function listarVeiculos() {
+          veiculosDiv.innerHTML = "<p>Carregando...</p>";
+          try {
+            const response = await axios.get(
+              "http://localhost:8080/veiculoREST"
+            );
+            const veiculos = response.data;
+            veiculosDiv.innerHTML = "";
+            veiculos.forEach((veiculo) => {
+              const div = document.createElement("div");
+              div.className = "veiculo";
+              div.innerHTML =
+                "<h3>" +
+                veiculo.placa +
+                "</h3><p>" +
+                veiculo.anofabricacao +
+                "</p> <div class='veiculo-buttons'><button class='btn-secondary onclick='editarveiculo(" +
+                veiculo.id +
+                ',"' +
+                veiculo.placa +
+                '",' +
+                veiculo.anofabricacao +
+                ")'>✏ Editar</button><button class='btn-danger' onclick='excluirVeiculo(" +
+                veiculo.id +
+                ")'>Excluir</button></div> ";
+              veiculosDiv.appendChild(div);
+            });
+          } catch (err) {
+            console.error("Erro ao carregar o veiculo:", err);
+            veiculosDiv.innerHTML = "<p>Erro ao carregar o veiculo</p>";
+          }
+        }
+
+        listarVeiculos();
       </script>
     </div>
   </body>

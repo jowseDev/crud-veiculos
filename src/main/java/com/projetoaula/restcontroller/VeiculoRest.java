@@ -25,7 +25,7 @@ public class VeiculoRest {
     @Autowired
     private VeiculoService servico;
 
-    @GetMapping("/listar")
+    @GetMapping
     public List<Veiculo> listarTodosVeiculos(){
         List<Veiculo> veiculos = servico.listar();
         return veiculos;
