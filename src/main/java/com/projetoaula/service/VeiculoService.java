@@ -31,5 +31,20 @@ private VeiculoRepository veiculoRepository;
     public List<Veiculo> listar() {
         return veiculoRepository.findAll();
     }
+    public Veiculo atualizarVeiculo(long id, Veiculo veiculo) {
+        Veiculo veiculoExistente = veiculoRepository.findById(id).orElseThrow(() -> new RuntimeException("Veículo não encontrado com o ID: " + id));
+        veiculoExistente.setAnofabricacao(veiculo.getAnofabricacao());
+        veiculoExistente.setPlaca(veiculo.getPlaca());
+
+        return veiculoRepository.save(veiculoExistente);
+        }
+        public boolean excluirPeloId(long id) {
+            if (veiculoRepository.existsById(id)) {
+                veiculoRepository.deleteById(id);
+                return true; // Excluído com sucesso
+            } else {
+                return false; // ID não encontrado
+            }
+    }
    
 }

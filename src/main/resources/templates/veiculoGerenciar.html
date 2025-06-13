@@ -190,6 +190,16 @@
             veiculosDiv.innerHTML = "<p>Erro ao carregar o veiculo</p>";
           }
         }
+        async function excluirVeiculo(id) {
+          if (confirm("Deseja mesmo excluir esse veiculo")) {
+            try {
+              await axios.delete(API_URL + "/" + id);
+              listarVeiculos();
+            } catch (err) {
+              alert("Erro ao excluir");
+            }
+          }
+        }
 
         listarVeiculos();
       </script>
