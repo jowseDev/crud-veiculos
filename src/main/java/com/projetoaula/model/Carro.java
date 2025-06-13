@@ -7,10 +7,10 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Carro extends Veiculo {
-    private int qtd_portas;
+public class Carro extends Veiculo{
+    
+    private int qtdPortas;
     private String cor;
-    private Double consumo_medio;
-
+    private float consumoMedio;
 
 }

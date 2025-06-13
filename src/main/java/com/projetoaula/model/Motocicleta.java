@@ -7,6 +7,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Motocicleta extends Veiculo {
+public class Motocicleta extends Veiculo{
+
     private int cilindradas;
+
 }

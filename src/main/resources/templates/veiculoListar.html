@@ -1,34 +1,62 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>Lista de veiculos</title>
-  </head>
-  <body>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Placa</th>
-          <th>Ano</th>
-          <th></th>
-          <th>Alterar</th>
-          <th>Excluir</th>
-        </tr>
-      </thead>
-      <tbody>
-        <br />
-        <tr th:each="veiculo : ${veiculos/listar}">
-          <td th:text="${veiculo.id}"></td>
-          <td th:text="${veiculo.placa}"></td>
-          <td th:text="${veiculo.anofabricacao}"></td>
-          <td>
-            <a th:href="@{/veiculo/alterar/{id}(id=${veiculo.id})}">Alterar</a>
-          </td>
-          <td>
-            <a th:href="@{/veiculo/excluir/{id}(id=${veiculo.id})}">Excluir</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </body>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Listar Veículos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="icon" href="/imgs/icons8-veículo-96.png" type="image/x-icon">
+
+  <style>
+    body {
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center p-6 font-sans text-gray-900">
+
+  <a href="javascript:history.back()"
+    class="flex items-center gap-2 text-blue-900 hover:text-black font-medium mb-4 transition duration-300">
+    <!-- Ícone de seta para esquerda -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
+      class="w-5 h-5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+    </svg>
+    Voltar
+  </a>
+
+  <h1 class="text-3xl font-bold text-blue-900 mb-6">Lista de Veículos</h1>
+
+  <table class="w-full max-w-4xl border border-gray-300 rounded shadow-md bg-white">
+    <thead class="bg-blue-900 text-white">
+      <tr>
+        <th class="py-3 px-4 text-left">ID</th>
+        <th class="py-3 px-4 text-left">Placa</th>
+        <th class="py-3 px-4 text-left">Ano</th>
+        <th class="py-3 px-4 text-center">Alterar</th>
+        <th class="py-3 px-4 text-center">Excluir</th>
+      </tr>
+    </thead>
+    <tbody class="text-sm" th:each="veiculo : ${veiculos}">
+      <tr class="hover:bg-blue-900 hover:text-white transition duration-300">
+        <td class="py-2 px-4 border-b border-gray-300" th:text="${veiculo.id}"></td>
+        <td class="py-2 px-4 border-b border-gray-300" th:text="${veiculo.placa}"></td>
+        <td class="py-2 px-4 border-b border-gray-300" th:text="${veiculo.anofabricacao}"></td>
+        <td class="py-2 px-4 border-b border-gray-300 text-center">
+          <a class="text-blue-600 hover:underline" th:href="@{/veiculo/alterar/{id}(id=${veiculo.id})}">Alterar</a>
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300 text-center">
+          <a class="text-red-600 hover:underline" th:href="@{/veiculo/excluir/{id}(id=${veiculo.id})}">Excluir</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+
 </html>

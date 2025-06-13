@@ -1,208 +1,101 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <title>CRUD SPA - Veículo</title>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Veículos</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="icon" href="/imgs/icons8-veículo-96.png" type="image/x-icon">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
     <style>
-      :root {
-        --bg: #f5f7fa;
-        --card-bg: #ffffff;
-        --text: #2d3436;
-        --primary: #0984e3;
-        --danger: #d63031;
-        --gray: #b2bec3;
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: "Segoe UI", sans-serif;
-        background-color: var(--bg);
-        color: var(--text);
-        padding: 2rem;
-      }
-      .container {
-        max-width: 800px;
-        margin: auto;
-      }
-      h1 {
-        text-align: center;
-        margin-bottom: 2rem;
-      }
-      form {
-        background: var(--card-bg);
-        padding: 1.5rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        margin-bottom: 2rem;
-        transition: all 0.3s ease;
-      }
-      input,
-      textarea {
-        width: 100%;
-        padding: 0.75rem;
-        margin-bottom: 1rem;
-        border: 1px solid var(--gray);
-        border-radius: 8px;
-        font-size: 1rem;
-        transition: border 0.2s;
-      }
-      input:focus,
-      textarea:focus {
-        border-color: var(--primary);
-        outline: none;
-      }
-      button {
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-      .btn-primary {
-        background-color: var(--primary);
-        color: white;
-      }
-      .btn-primary:hover {
-        background-color: #0652dd;
-      }
-      .btn-secondary {
-        background-color: var(--gray);
-        color: white;
-      }
-      .btn-secondary:hover {
-        background-color: #636e72;
-      }
-      .btn-danger {
-        background-color: var(--danger);
-        color: white;
-      }
-      .btn-danger:hover {
-        background-color: #c0392b;
-      }
-      .veiculo {
-        background: var(--card-bg);
-        padding: 1.2rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
-        margin-bottom: 1.5rem;
-        transition: transform 0.2s;
-      }
-      .veiculo:hover {
-        transform: scale(1.01);
-      }
-      .veiculo h3 {
-        margin-bottom: 0.5rem;
-        color: var(--primary);
-      }
-      .veiculo-buttons {
-        margin-top: 1rem;
-        display: flex;
-        gap: 0.5rem;
-      }
-      @media (max-width: 600px) {
-        button {
-          width: 100%;
+        body {
+            background-color: #f9f9f9;
+            /* branco suave */
         }
-        .veiculo-buttons {
-          flex-direction: column;
-        }
-      }
     </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>CRUD SPA - Veículo</h1>
-      <form id="formulario">
-        <input type="hidden" id="veiculoId" />
-        <input type="text" id="placa" placeholder="Placa" required />
-        <input
-          type="number"
-          id="fabricacao"
-          placeholder="Ano de fabricacao"
-          required
-        />
-        <button class="btn-primary" type="submit">Salvar</button>
-      </form>
-      <div id="veiculos"></div>
-      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-      <script>
-        const API_URL = "http://localhost:8080/veiculoREST";
-        const form = document.getElementById("formulario");
-        const veiculosDiv = document.getElementById("veiculos");
+    <script>
+        function listarAssincrono() {
+            $("#corpo").html('');
 
-        form.addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const id = document.getElementById("veiculoId").value;
-          const placa = document.getElementById("placa").value;
-          const fabricacao = document.getElementById("fabricacao").value;
-          const veiculo = { placa, fabricacao };
+            $.getJSON('http://localhost:8080/veiculoREST/listar', function (data) {
+                $.each(data, function (key, item) {
+                    $("#corpo").append(`
+                        <tr class="hover:bg-blue-900 hover:text-white transition duration-300">
+                            <td class="py-2 px-4 border-b border-gray-300">${item.id}</td>
+                            <td class="py-2 px-4 border-b border-gray-300">${item.placa}</td>
+                            <td class="py-2 px-4 border-b border-gray-300">${item.anofabricacao}</td>
+                            <td class="py-2 px-4 border-b border-gray-300 text-center">🛠️</td>
+                            <td class="py-2 px-4 border-b border-gray-300 text-center">❌</td>
+                        </tr>
+                    `);
+                });
 
-          try {
-            if (id) {
-              await axios.put(API_URL + "/" + id, veiculo);
-              alert("Veículo alterado com sucesso");
-            } else {
-              await axios.post(API_URL, veiculo);
-              alert("Veiculo salvo com sucesso!");
-            }
-            form.reset();
-            document.getElementById("veiculoId").value = "";
-          } catch (error) {
-            alert("Erro ao salvar o veículo");
-          }
-          listarVeiculos();
-        });
-
-        async function listarVeiculos() {
-          veiculosDiv.innerHTML = "<p>Carregando...</p>";
-          try {
-            const response = await axios.get(
-              "http://localhost:8080/veiculoREST"
-            );
-            const veiculos = response.data;
-            veiculosDiv.innerHTML = "";
-            veiculos.forEach((veiculo) => {
-              const div = document.createElement("div");
-              div.className = "veiculo";
-              div.innerHTML =
-                "<h3>" +
-                veiculo.placa +
-                "</h3><p>" +
-                veiculo.anofabricacao +
-                "</p> <div class='veiculo-buttons'><button class='btn-secondary onclick='editarveiculo(" +
-                veiculo.id +
-                ',"' +
-                veiculo.placa +
-                '",' +
-                veiculo.anofabricacao +
-                ")'>✏ Editar</button><button class='btn-danger' onclick='excluirVeiculo(" +
-                veiculo.id +
-                ")'>Excluir</button></div> ";
-              veiculosDiv.appendChild(div);
+                $("#tabela-veiculos").removeClass("hidden").addClass("animate-fade-in");
             });
-          } catch (err) {
-            console.error("Erro ao carregar o veiculo:", err);
-            veiculosDiv.innerHTML = "<p>Erro ao carregar o veiculo</p>";
-          }
-        }
-        async function excluirVeiculo(id) {
-          if (confirm("Deseja mesmo excluir esse veiculo")) {
-            try {
-              await axios.delete(API_URL + "/" + id);
-              listarVeiculos();
-            } catch (err) {
-              alert("Erro ao excluir");
-            }
-          }
         }
 
-        listarVeiculos();
-      </script>
+        // Custom animation class
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: 0 },
+                            '100%': { opacity: 1 },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="text-gray-900 font-sans">
+
+    <a href="javascript:history.back()"
+        class="flex items-center gap-2 text-blue-900 hover:text-black font-medium mb-4 transition duration-300">
+        <!-- Ícone de seta para esquerda -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
+            class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+        Voltar
+    </a>
+
+    <div class="min-h-screen flex flex-col items-center justify-center p-6">
+        <h1 class="text-3xl font-bold text-blue-900 mb-6">Lista de Veículos</h1>
+
+        <button onclick="listarAssincrono()"
+            class="bg-blue-900 text-white px-6 py-2 rounded hover:bg-black transition duration-300 mb-6 shadow-md">
+            Gerar
+        </button>
+
+        <table id="tabela-veiculos" class="hidden w-full max-w-4xl border border-gray-300 rounded shadow-md bg-white">
+            <thead class="bg-blue-900 text-white">
+                <tr>
+                    <th class="py-3 px-4 text-left">ID</th>
+                    <th class="py-3 px-4 text-left">Placa</th>
+                    <th class="py-3 px-4 text-left">Ano</th>
+                    <th class="py-3 px-4 text-center">Alterar</th>
+                    <th class="py-3 px-4 text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody id="corpo" class="text-sm">
+                <!-- Dados carregados via JS -->
+            </tbody>
+        </table>
     </div>
-  </body>
+</body>
+
 </html>

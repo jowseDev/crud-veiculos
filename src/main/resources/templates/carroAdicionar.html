@@ -3,11 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Adicionar Caminhão</title>
+    <title>Adicionar Novo Carro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="icon" href="/imgs/icons8-caminhão-96.png" type="image/x-icon">
+    <link rel="icon" href="/imgs/icons8-carro-96.png" type="image/x-icon">
 
     <style>
         body {
@@ -28,22 +30,24 @@
         Voltar
     </a>
 
-    <form th:action="@{/caminhao/salvar}" method="post"
-        class="bg-white p-8 rounded shadow-md w-full max-w-lg space-y-4">
+    <form th:action="@{/carro/salvar}" method="post" class="bg-white p-8 rounded shadow-md w-full max-w-lg space-y-4">
 
-        <h2 class="text-2xl font-bold text-blue-900 text-center">Adicionar Caminhão</h2>
+        <h2 class="text-2xl font-bold text-blue-900 text-center">Adicionar Carro</h2>
 
         <input type="text" name="placa" placeholder="Placa" required
-            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-900" />
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-900" />
 
         <input type="number" name="anofabricacao" placeholder="Fabricação" required
-            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-900" />
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-900" />
 
-        <input type="number" name="eixos" placeholder="Eixos" required
-            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-900" />
+        <input type="text" name="qtdPortas" placeholder="Qtd Portas" required
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-900" />
 
-        <input type="number" name="carga" placeholder="Carga" required
-            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-900" />
+        <input type="text" name="cor" placeholder="Cor" required
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-900" />
+
+        <input type="text" name="consumoMedio" placeholder="Consumo médio" required
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-900" />
 
         <button type="submit"
             class="w-full bg-blue-900 text-white py-2 rounded hover:bg-black transition duration-300 shadow">

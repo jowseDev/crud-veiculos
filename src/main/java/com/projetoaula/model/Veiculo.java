@@ -12,10 +12,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-//essa anotação define que a estrategia de persistencia nas classes herdam
-//dessa classe será por junção(JOINED)
+/* Essa anotação define que a estratégia de persistência nas classes que herdarem
+    dessa classe será por junção (JOINED)
+*/
 @Inheritance(strategy = jakarta.persistence.InheritanceType.JOINED)
-@Table(name = "veiculo")
+@Table(name = "veiculos")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,8 +25,10 @@ public class Veiculo {
     
     @Id
     @GeneratedValue
-    @Column(name = "id_veiculo", nullable = false, unique = true )
+    @Column(name = "id_veiculo", nullable = false, unique = true)
     private Long id;
+    
     private String placa;
+    
     private int anofabricacao;
 }

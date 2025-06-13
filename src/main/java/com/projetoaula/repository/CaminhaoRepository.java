@@ -6,10 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.projetoaula.model.Caminhao;
 
-public interface CaminhaoRepository extends JpaRepository<Caminhao, Long> {
-
-    List<Caminhao> findByCargaGreaterThanEqual(double carga);
+public interface CaminhaoRepository extends JpaRepository<Caminhao, Long>{
     
-} 
-    
+    List<Caminhao> findByCargaGreaterThanEqual(Double carga);
 
+}

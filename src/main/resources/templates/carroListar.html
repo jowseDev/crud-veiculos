@@ -1,14 +1,69 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carro Listar</title>
+    <title>Listar Carros</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="icon" href="/imgs/icons8-carro-96.png" type="image/x-icon">
+
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
-<body>
-    <form th:action="@{/carroListar}" method="post">
-        <br>
-        <p>Tela Carros</p>
-    </form>
+
+<body class="min-h-screen flex flex-col items-center justify-center p-6 font-sans text-gray-900">
+
+    <a href="javascript:history.back()"
+        class="flex items-center gap-2 text-blue-900 hover:text-black font-medium mb-4 transition duration-300">
+        <!-- Ícone de seta para esquerda -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
+            class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+        Voltar
+    </a>
+
+    <h1 class="text-3xl font-bold text-blue-900 mb-6">Lista de Carros</h1>
+
+    <table class="w-full max-w-6xl border border-gray-300 rounded shadow-md bg-white">
+        <thead class="bg-blue-900 text-white">
+            <tr>
+                <th class="py-3 px-4 text-left">ID</th>
+                <th class="py-3 px-4 text-left">Placa</th>
+                <th class="py-3 px-4 text-left">Ano</th>
+                <th class="py-3 px-4 text-left">Portas</th>
+                <th class="py-3 px-4 text-left">Cor</th>
+                <th class="py-3 px-4 text-left">Consumo médio</th>
+                <th class="py-3 px-4 text-center">Alterar</th>
+                <th class="py-3 px-4 text-center">Excluir</th>
+            </tr>
+        </thead>
+        <tbody class="text-sm" th:each="carro : ${carros}">
+            <tr class="hover:bg-blue-900 hover:text-white transition duration-300">
+                <td class="py-2 px-4 border-b border-gray-300" th:text="${carro.id}"></td>
+                <td class="py-2 px-4 border-b border-gray-300" th:text="${carro.placa}"></td>
+                <td class="py-2 px-4 border-b border-gray-300" th:text="${carro.anofabricacao}"></td>
+                <td class="py-2 px-4 border-b border-gray-300" th:text="${carro.qtdPortas}"></td>
+                <td class="py-2 px-4 border-b border-gray-300" th:text="${carro.cor}"></td>
+                <td class="py-2 px-4 border-b border-gray-300" th:text="${carro.consumoMedio}"></td>
+                <td class="py-2 px-4 border-b border-gray-300 text-center">
+                    <a class="text-blue-600 hover:underline"
+                        th:href="@{/carro/alterar/{id}(id=${carro.id})}">Alterar</a>
+                </td>
+                <td class="py-2 px-4 border-b border-gray-300 text-center">
+                    <a class="text-red-600 hover:underline" th:href="@{/carro/excluir/{id}(id=${carro.id})}">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
 </body>
+
 </html>

@@ -8,14 +8,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "caminhao")
 @Getter
 @Setter
-@Table(name = "caminhao")
-@NoArgsConstructor
 @AllArgsConstructor
-public class Caminhao extends Veiculo {
+@NoArgsConstructor
+public class Caminhao extends Veiculo{
     
     private int eixos;
+
     private double carga;
 
 }

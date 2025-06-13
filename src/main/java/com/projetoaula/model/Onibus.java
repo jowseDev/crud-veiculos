@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Onibus extends Veiculo {
-    private int lugares;
     
+    private int lugares;
+
 }

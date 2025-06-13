@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.projetoaula.model.Caminhao;
 import com.projetoaula.repository.CaminhaoRepository;
@@ -12,10 +11,11 @@ import com.projetoaula.repository.CaminhaoRepository;
 @Service
 public class CaminhaoService {
     
-@Autowired
-private CaminhaoRepository repositorio;
+    @Autowired
+    private CaminhaoRepository repositorio;
 
     public Caminhao salvar(Caminhao caminhao){
+
         return repositorio.save(caminhao);
     }
 
@@ -23,19 +23,20 @@ private CaminhaoRepository repositorio;
         return repositorio.findAll();
     }
 
-    public void excluir(@PathVariable Long id){
+    public void excluir(Long id){
         repositorio.deleteById(id);
     }
+
     public void alterar(Caminhao caminhao){
         repositorio.save(caminhao);
     }
+
     public Caminhao carregar(Long id){
         return repositorio.findById(id).orElse(null);
     }
 
-    public List<Caminhao> ListaCaminhoesPesados(double carga){
-        return repositorio.findByCargaGreaterThanEqual(carga);
-        
+    public List<Caminhao> listarPesados(double peso){
+        return repositorio.findByCargaGreaterThanEqual(peso);
     }
-  
+
 }

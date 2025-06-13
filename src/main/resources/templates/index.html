@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Inicial</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Font Awesome (para os ícones específicos) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <link rel="icon" href="/imgs/icons8-base-96.png" type="image/x-icon">
+
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+        .swal2-styled {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 1.25rem;
+            padding: 12px 0;
+            margin: 5px 0;
+        }
+        .btn-icon {
+            display: flex;
+            items-center: center;
+            justify-center: center;
+        }
+        .btn-icon i {
+            margin-right: 8px; /* Espaçamento entre ícone e texto */
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center text-gray-900 font-sans p-6">
+
+    <h1 class="text-3xl font-bold text-blue-900 mb-8">Menu inicial projeto base</h1>
+
+    <div class="flex flex-col gap-4">
+        <!-- Menu Carro -->
+        <button onclick="abrirMenuCarro()"
+            class="btn-icon bg-blue-900 text-white px-6 py-2 rounded hover:bg-black transition duration-300 shadow">
+            <!-- Ícone de carro (Font Awesome) -->
+            <i class="fas fa-car w-6 h-6"></i>
+            Menu Carro
+        </button>
+        
+        <!-- Menu Caminhão (mesmo tom de azul do projeto) -->
+        <button onclick="abrirMenuCaminhao()"
+            class="btn-icon bg-blue-900 text-white px-6 py-2 rounded hover:bg-black transition duration-300 shadow">
+            <!-- Ícone de caminhão (Font Awesome) -->
+            <i class="fas fa-truck w-6 h-6"></i>
+            Menu Caminhão
+        </button>
+
+        <!-- Menu Veículo (mesmo tom de azul do projeto) -->
+        <button onclick="abrirMenuVeiculo()"
+            class="btn-icon bg-blue-900 text-white px-6 py-2 rounded hover:bg-black transition duration-300 shadow">
+            <!-- Ícone de veículo genérico (Font Awesome) -->
+            <i class="fas fa-car-side w-6 h-6"></i>
+            Menu Veículo
+        </button>
+    </div>
+
+    <script>
+        function abrirMenuCarro() {
+            Swal.fire({
+                title: 'Menu Carro',
+                showConfirmButton: false,
+                html: `
+                    <button class="swal2-styled bg-blue-900 text-white rounded hover:bg-black transition duration-300" onclick="window.location.href='/carro/listar'">
+                        Listar Carros
+                    </button><br><br>
+                    <button class="swal2-styled bg-blue-900 text-white rounded hover:bg-black transition duration-300" onclick="window.location.href='/carro/adicionar'">
+                        Adicionar Carro
+                    </button>
+                `
+            });
+        }
+
+        function abrirMenuCaminhao() {
+            Swal.fire({
+                title: 'Menu Caminhão',
+                showConfirmButton: false,
+                html: `
+                    <button class="swal2-styled bg-blue-900 text-white rounded hover:bg-black transition duration-300" onclick="window.location.href='/caminhao/adicionar'">
+                        Adicionar Caminhão
+                    </button><br><br>
+                    <button class="swal2-styled bg-blue-900 text-white rounded hover:bg-black transition duration-300" onclick="window.location.href='/caminhao/listar'">
+                        Listar Caminhões
+                    </button><br><br>
+                    <button class="swal2-styled bg-blue-900 text-white rounded hover:bg-black transition duration-300" onclick="window.location.href='/caminhao/pesados'">
+                        Caminhões Pesados
+                    </button>
+                `
+            });
+        }
+
+        function abrirMenuVeiculo() {
+            Swal.fire({
+                title: 'Menu Veículo',
+                showConfirmButton: false,
+                html: `
+                    <button class="swal2-styled bg-blue-900 text-white rounded hover:bg-black transition duration-300" onclick="window.location.href='/veiculo/proibidos'">
+                        Proibidos
+                    </button><br><br>
+                    <button class="swal2-styled bg-blue-900 text-white rounded hover:bg-black transition duration-300" onclick="window.location.href='/veiculo/isentos'">
+                        Isentos
+                    </button><br><br>
+                    <button class="swal2-styled bg-blue-900 text-white rounded hover:bg-black transition duration-300" onclick="window.location.href='/veiculo/adicionar'">
+                        Adicionar Veículo
+                    </button><br><br>
+                    <button class="swal2-styled bg-blue-900 text-white rounded hover:bg-black transition duration-300" onclick="window.location.href='/veiculo/gerenciar'">
+                        Gerenciar Veículos
+                    </button>
+                `
+            });
+        }
+    </script>
+
+</body>
+
+</html>
